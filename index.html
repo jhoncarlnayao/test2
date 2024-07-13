@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="letter-image">
+        <div class="animated-mail">
+            <div class="back-fold"></div>
+            <div class="letter">
+                <div class="letter-border"></div>
+                <div class="letter-title"></div>
+                <div class="letter-context"></div>
+                <div class="letter-stamp">
+                    <div class="letter-stamp-inner"></div>
+                </div>
+            </div>
+            <div class="top-fold"></div>
+            <div class="body"></div>
+            <div class="left-fold"></div>
+        </div>
+        <div class="shadow"></div>
+        <div class="popup-card">
+            <div class="desktop">
+                <div class="group-wrapper">
+                    <img class="group" src="https://c.animaapp.com/m4OxoPTf/img/group-13.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="confetti-container"></div>
+    <audio id="birthday-music" src="0714.mp3"></audio>
+
+    <style>
+        .letter-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+        }
+
+        .animated-mail {
+            position: absolute;
+            height: 150px;
+            width: 200px;
+            transition: 0.4s;
+        }
+
+        .body {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border: black  solid 10px;
+            border-style: solid;
+            border-width: 0 0 100px 200px;
+            border-color: transparent transparent #FFB6C1 transparent;
+            font-family: "Inter";
+            z-index: 2;
+        }
+
+        .top-fold {
+            position: absolute;
+            top: 50px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 50px 100px 0 100px;
+            transform-origin: 50% 0%;
+            transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
+            border-color: #fd9cab transparent transparent transparent;
+            z-index: 2;
+        }
+
+        .back-fold {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 100px;
+            background: #FFB6C1;
+            z-index: 0;
+        }
+
+        .left-fold {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 50px 0 50px 100px;
+            border-color: transparent transparent transparent #FFB6C1;
+            z-index: 2;
+        }
+
+        .letter {
+            left: 20px;
+            bottom: 0px;
+            position: absolute;
+            width: 160px;
+            height: 60px;
+            background: white;
+            z-index: 1;
+            overflow: hidden;
+            transition: 0.4s 0.2s;
+        }
+
+        .letter-border {
+            height: 10px;
+            width: 100%;
+            background: repeating-linear-gradient(-45deg, #cb5a5e, #cb5a5e 8px, transparent 8px, transparent 18px);
+        }
+
+        .letter-title,
+        .letter-context {
+            margin: 10px 5px;
+            height: 10px;
+            width: 40%;
+            background: #cb5a5e;
+        }
+
+        .letter-stamp {
+            margin-top: 30px;
+            margin-left: 120px;
+            border-radius: 100%;
+            height: 30px;
+            width: 30px;
+            background: #cb5a5e;
+            opacity: 0.3;
+        }
+
+        .shadow {
+            position: absolute;
+            top: 200px;
+            left: 50%;
+            width: 400px;
+            height: 30px;
+            transition: 0.4s;
+            transform: translateX(-50%);
+            border-radius: 100%;
+            background: radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+        }
+
+        .letter-image.open .animated-mail {
+            transform: translateY(50px);
+        }
+
+        .letter-image.open .top-fold {
+            transition: transform 0.4s, z-index 0.2s;
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .letter-image.open .letter {
+            height: 180px;
+        }
+
+        .letter-image.open .shadow {
+            width: 250px;
+        }
+
+       
+        .popup-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: absolute;
+            top: 30%;
+            left: -40%;
+            width: 900px;
+            height: 500px;
+            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.9);
+            padding: 0;
+            background: none; 
+            opacity: 0;
+            transition: opacity 0.4s, transform 0.4s;
+            z-index: 3; 
+        }
+
+        .popup-card .desktop {
+            background-color: transparent; /* Make the background transparent */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .popup-card .desktop .group-wrapper {
+            background-color: transparent; 
+            width: 800px;
+            height: 600px;
+            position: relative;
+        }
+
+        .popup-card .desktop .group {
+            position: absolute;
+            width: 900px;
+            height: 700px;
+            top: 0;
+            left: 148px;
+        }
+
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+        * {
+            -webkit-font-smoothing: antialiased;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0px;
+            height: 100%;
+        }
+        /* a blue color as a generic focus style */
+        button:focus-visible {
+            outline: 2px solid #4a90e2 !important;
+            outline: -webkit-focus-ring-color auto 5px !important;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2; /* Ensures confetti is visible above other elements */
+        }
+
+        .confetti {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: floatConfetti 3s infinite ease-in-out;
+        }
+
+        @keyframes floatConfetti {
+            0% {
+                transform: translateY(-300px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+    <script>
+        const confettiContainer = document.querySelector('.confetti-container');
+        const music = document.getElementById('birthday-music');
+        let confettiInterval;
+        const confettiImages = ['cola.png', 'pic.png']; 
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            const randomImage = confettiImages[Math.floor(Math.random() * confettiImages.length)];
+            confetti.style.backgroundImage = `url("${randomImage}")`;
+            confetti.style.top = Math.random() * 100 + '%';
+            confetti.style.left = Math.random() * 100 + '%';
+            confettiContainer.appendChild(confetti);
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+
+        document.querySelector('.letter-image').addEventListener('click', () => {
+            const letterImage = document.querySelector('.letter-image');
+            letterImage.classList.toggle('open');
+            if (letterImage.classList.contains('open')) {
+                confettiInterval = setInterval(() => {
+                    for (let i = 0; i < 2; i++) {  
+                        createConfetti();
+                    }
+                }, 500);  
+                music.play();
+                document.querySelector('.popup-card').style.opacity = '1';
+                document.querySelector('.popup-card').style.transform = 'translate(-50%, -50%) scale(1)';
+            } else {
+                clearInterval(confettiInterval);
+                music.pause();
+                music.currentTime = 0; 
+                document.querySelector('.popup-card').style.opacity = '0';
+                document.querySelector('.popup-card').style.transform = 'translate(-50%, -50%) scale(0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
